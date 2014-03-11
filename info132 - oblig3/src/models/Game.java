@@ -28,6 +28,8 @@ public class Game {
 		player1.addItem(item2);
 		player1.addItem(item3);
 
-		player1.print();
+		player1.setType("WarRioR   ");
+		System.out.println(player1);
+
 	}
 }

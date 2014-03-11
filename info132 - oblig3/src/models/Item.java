@@ -37,6 +37,11 @@ public class Item {
 		System.out.println("Name: " + name + " Description: " + description
 				+ " Value: " + value + " Weight: " + weight);
 	}
+	
+	@Override 
+	public String toString(){
+		return " Name: " + name + " | Description: " + description + " " + " | Value: " + value + " | Weight: " + weight ; 
+	}
 
 	/**
 	 * Sets items name

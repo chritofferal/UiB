@@ -78,15 +78,17 @@ public class Player {
 	 * @param itemName
 	 *            items name
 	 */
-	public void sellItem(String itemName) {
+	public boolean sellItem(String itemName) {
 		Item item = findItem(itemName);
 		if (item != null) {
 			gold += item.getValue();
 			items.remove(item);
 			System.out.println(itemName + " is sold for " + item.getValue()
 					+ " gold!");
+			return true; 
 		} else {
 			System.out.println("You don't have an item with this name.");
+			return false; 
 		}
 	}
 
@@ -149,6 +151,17 @@ public class Player {
 			entry.getValue().print();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Name: " + name + "\nType: " + type + "\nHealth: " + health
+				+ "\nItems: " + items.values() + "\nMaxWeight: " + maxWeight + "\nGold: "
+				+ gold + "\n";
+	}
+
+	public void useItem(Item item){
+		System.out.println(getName() + " " + item.getAction() + " " + item.getName());
+	}
 
 	/**
 	 * @return the players name
@@ -207,7 +220,7 @@ public class Player {
 	
 		if (type.trim().toLowerCase().equals("mage") || type.trim().toLowerCase().equals("warrior")
 				|| type.trim().toLowerCase().equals("rogue") || type.trim().toLowerCase().equals("ranger")) {
-			this.type = type;
+			this.type = type.trim().toLowerCase();
 		} else {
 			this.type = "Unspecified";
 		}
