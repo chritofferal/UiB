@@ -197,9 +197,16 @@ public class Player {
 	 *            the players' new type
 	 */
 	public void setType(String type) {
-
-		if (type.equals("Mage") || type.equals("Warrior")
-				|| type.equals("Rogue") || type.equals("Ranger")) {
+		/*
+		 * Eventuelt: 
+		 * type = type.trim().toLowerCase(); 
+		 * if ( type.equals("mage") etc; 
+		 * 
+		 *  Bruker følgende måte for å bevare original imput. 
+		 */
+	
+		if (type.trim().toLowerCase().equals("mage") || type.trim().toLowerCase().equals("warrior")
+				|| type.trim().toLowerCase().equals("rogue") || type.trim().toLowerCase().equals("ranger")) {
 			this.type = type;
 		} else {
 			this.type = "Unspecified";
