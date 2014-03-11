@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Oblig 1 This class represents a Player in a role-playing game.
  * 
- * @author Eirik Berntsen & Maiken Beate Fjellanger
+ * @author Eirik Berntsen & Maiken Beate Fjellanger & Christoffer Lorenzen
  * @version 0.2 07.03.2014
  * 
  */
@@ -174,7 +174,7 @@ public class Player {
 	/**
 	 * @return the players itemlist
 	 */
-	public ArrayList<Item> getItems() {
+	public HashMap<String, Item> getItems() {
 		return items;
 	}
 
@@ -210,7 +210,7 @@ public class Player {
 	 * @param items
 	 *            players new list of items
 	 */
-	public void setItems(ArrayList<Item> items) {
+	public void setItems(HashMap<String, Item> items) {
 		this.items = items;
 	}
 
