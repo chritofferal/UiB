@@ -1,5 +1,8 @@
 package models;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Oblig 1 This class represents a Player in a role-playing game.
@@ -14,7 +17,7 @@ public class Player {
 	private String name;
 	private String type;
 	private int health;
-	private ArrayList<Item> items;
+	private HashMap<String, Item> items;
 	private int maxWeight;
 	private int gold;
 
@@ -32,7 +35,7 @@ public class Player {
 		setName(playerName);
 		setType(playerType);
 		setMaxWeight(maxWeight);
-		items = new ArrayList<Item>();
+		items = new HashMap<String, Item>();;
 		health = 100;
 	}
 
@@ -46,7 +49,7 @@ public class Player {
 	 */
 	public void addItem(Item item) {
 		if ((item.getWeight() + getTotalWeight()) <= maxWeight) {
-			items.add(item);
+			items.put(item.getName(), item);
 		} else {
 			System.out.println("Too heavy to carry now");
 		}
@@ -94,8 +97,8 @@ public class Player {
 	 */
 	private int getTotalWeight() {
 		int totalWeight = 0;
-		for (Item item : items) {
-			totalWeight += item.getWeight();
+		for (Map.Entry<String, Item> entry : items.entrySet()){
+			totalWeight += entry.getValue().getWeight();
 		}
 		return totalWeight;
 	}
@@ -142,8 +145,8 @@ public class Player {
 		} else {
 			System.out.println("Is dead. Game Over");
 		}
-		for (Item item : items) {
-			item.print();
+		for (Map.Entry<String, Item> entry : items.entrySet()){
+			entry.getValue().print();
 		}
 	}
 
