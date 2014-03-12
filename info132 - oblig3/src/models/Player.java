@@ -67,7 +67,7 @@ public class Player {
 				item = items.get(i);
 			}
 		}
-		return item;
+		return null;
 	}
 
 	/**
