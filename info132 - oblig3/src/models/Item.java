@@ -40,7 +40,7 @@ public class Item {
 	
 	@Override 
 	public String toString(){
-		return " Name: " + name + " | Description: " + description + " " + " | Value: " + value + " | Weight: " + weight ; 
+		return "[ Name: " + name + " | Description: " + description + " " + " | Value: " + value + " | Weight: " + weight +"]"; 
 	}
 
 	/**
