@@ -31,7 +31,7 @@ public class Game {
 
 		player1.setType("WarRioR   ");
 		System.out.println(player1);
-		player1.sellItem("Shiled"); 
+		player1.useItem(item1);
 		
 	}
 }

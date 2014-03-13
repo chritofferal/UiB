@@ -22,7 +22,7 @@ public class Item {
 	 * @param action
 	 */
 	public Item(String name, String description, int value, int weight,
-			String action) {
+		String action) {
 		setName(name);
 		setDescription(description);
 		setValue(value);
