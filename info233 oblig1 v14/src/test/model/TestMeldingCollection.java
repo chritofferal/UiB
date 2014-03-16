@@ -1,9 +1,11 @@
 package test.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 
 import kravspesifikasjon.TwitterMelding;
 import model.Bruker;
@@ -12,6 +14,8 @@ import model.Tweet;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.common.collect.Iterables;
 
 public class TestMeldingCollection {
 	
@@ -23,9 +27,9 @@ public class TestMeldingCollection {
 	@Before
 	public void setup() throws Exception{
 		
-		b1 = new Bruker ("NAVN", "ID");
-		b2 = new Bruker ("NAVN1", "ID1");
-		b3 = new Bruker ("NAVN2", "ID2"); 
+		b1 = new Bruker ("NAVN", "ID", 1, 1, 1);
+		b2 = new Bruker ("NAVN1", "ID1", 2, 2, 2);
+		b3 = new Bruker ("NAVN2", "ID2", 3, 3, 3); 
 	
 		calendar = Calendar.getInstance();
 		calendar1 = Calendar.getInstance();
@@ -128,7 +132,26 @@ public class TestMeldingCollection {
 
 	@Test
 	public void testSortertEtterLengde() {
-		samling.sortertEtterTid(true);
+	
+		Collection<TwitterMelding> samling1 = samling.sortertEtterLengde(true);
+		System.out.println(samling1);
+		for (int i = 0; i < samling1.size(); i++) {
+			
+			assertTrue(samling1.iterator().next().getMeldingsTekst().length() <= Iterables.get(samling1, i).getMeldingsTekst().length());
+			
+		} 
+		
+	
+		samling1 = samling.sortertEtterLengde(false);
+		System.out.println(samling1);
+		System.out.println(samling1.size());
+		for (int i = 0; i < samling1.size(); i++) {
+			
+			assertTrue(samling1.iterator().next().getMeldingsTekst().length() >= Iterables.get(samling1, i).getMeldingsTekst().length());
+			
+		} 
+		
+		
 	}
 
 	@Test

@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
+import comparators.CompareMeldingLength;
+import comparators.CompareMeldingTime;
 import kravspesifikasjon.TwitterBruker;
 import kravspesifikasjon.TwitterMelding;
 import kravspesifikasjon.TwitterMeldingCollection;
@@ -16,7 +18,7 @@ public class MeldingCollection implements TwitterMeldingCollection, Iterable<Twi
 	 */
 	private static final long serialVersionUID = 1435977235872095005L;	
 	
-	protected ArrayList<TwitterMelding> samling = new ArrayList<>();; 
+	protected ArrayList<TwitterMelding> samling = new ArrayList<>();
 	
 	/**
 	 * Lager en meldingssamling og tar en samling av meldinger som paramter.
@@ -129,8 +131,10 @@ public class MeldingCollection implements TwitterMeldingCollection, Iterable<Twi
 
 	@Override
 	public Collection<TwitterMelding> sortertEtterLengde(boolean lengsteFørst) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TwitterMelding> nySamling = new ArrayList<>(samling); 
+	
+		Collections.sort(nySamling, new CompareMeldingLength(lengsteFørst));
+		return nySamling;
 	}
 
 	@Override
@@ -201,6 +205,6 @@ public class MeldingCollection implements TwitterMeldingCollection, Iterable<Twi
 	}
 
 
-	
+
 
 }
