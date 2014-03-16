@@ -1,6 +1,6 @@
 package models;
 /**
- * This class represents the game.
+ * This class represents the game. asdasd
  * 
  * In oblig 1 the main method creates a Player and prints the information about
  * the player to the console.
