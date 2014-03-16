@@ -1,5 +1,7 @@
 package models;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -61,13 +63,13 @@ public class Player {
 	 * @return item - if found else null
 	 */
 	public Item findItem(String itemName) {
-		Item item = null;
-		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).getName().equals(itemName)) {
-				item = items.get(i);
+		
+		for (Map.Entry<String, Item> entry : items.entrySet()){
+			if (entry.getValue().equals(itemName)){
+				return entry.getValue(); 
 			}
-		}
-		return null;
+		} return null; 
+		
 	}
 
 	/**
@@ -150,6 +152,23 @@ public class Player {
 		}
 	}
 	
+	
+/**
+ * 
+ * @param item
+ * @return
+ */
+	public boolean useItem(Item item){
+		if (findItem(item.getName()) != null){
+			System.out.println(getName() + " " + item.getAction() + "  " + item.getName());
+			return true; 
+		} 
+		System.out.println("You do not own that item");
+		return false;	
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		return "Name: " + name + "\nType: " + type + "\nHealth: " + health
@@ -157,10 +176,7 @@ public class Player {
 				+ gold + "\n";
 	}
 
-	public void useItem(Item item){
-		System.out.println(getName() + " " + item.getAction() + " " + item.getName());
-	}
-
+	
 	/**
 	 * @return the players name
 	 */
