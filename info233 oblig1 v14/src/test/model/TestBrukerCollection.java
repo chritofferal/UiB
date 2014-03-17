@@ -1,10 +1,7 @@
 package test.model;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import kravspesifikasjon.TwitterBruker;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import model.Bruker;
 import model.BrukerCollection;
 
@@ -36,9 +33,9 @@ public class TestBrukerCollection {
 	@Test
 	public void testBrukerCollection(){
 
-		System.out.println(brukerSamling.list());
+	
 	brukerSamling1 = new BrukerCollection(brukerSamling.list());
-	System.out.println(brukerSamling1);
+	
 	assertEquals(brukerSamling, brukerSamling1); 
 	}
 	
@@ -122,7 +119,7 @@ public class TestBrukerCollection {
 		brukerSamling1.insert(b3);
 		
 		
-		//System.out.println(brukerSamling);
+	
 		
 		assertTrue(brukerSamling1.equals(brukerSamling));
 		

@@ -30,20 +30,23 @@ public class BrukerCollection implements TwitterBrukerCollection, Iterable<Twitt
 	 */
 	public BrukerCollection(ArrayList<TwitterBruker> brukere){
 		brukerSamling = new ArrayList<>(); 
+		maxSize = 100; 
 		for (TwitterBruker bruker : brukere) {
-			this.insert(bruker);	
+		
+			insert(bruker);	
 		}
 		
-		maxSize = 100; 
+		
 	}
 	
 	public BrukerCollection(Collection<TwitterBruker> samling){
 		brukerSamling = new ArrayList<>(); 
+		maxSize = 100; 
 		for (TwitterBruker bruker : samling) {
 			brukerSamling.add(bruker); 
 		}
 		
-		maxSize = 100; 
+		
 	}
 	
 	public BrukerCollection(){
