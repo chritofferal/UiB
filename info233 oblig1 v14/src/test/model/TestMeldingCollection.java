@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
+
 
 import kravspesifikasjon.TwitterMelding;
 import model.Bruker;
@@ -14,6 +14,7 @@ import model.Tweet;
 
 import org.junit.Before;
 import org.junit.Test;
+
 
 import com.google.common.collect.Iterables;
 
@@ -27,9 +28,9 @@ public class TestMeldingCollection {
 	@Before
 	public void setup() throws Exception{
 		
-		b1 = new Bruker ("NAVN", "ID", 1, 1, 1);
-		b2 = new Bruker ("NAVN1", "ID1", 2, 2, 2);
-		b3 = new Bruker ("NAVN2", "ID2", 3, 3, 3); 
+		b1 = new Bruker ("NAVN", "ID", 1, 1, 1, 1);
+		b2 = new Bruker ("NAVN1", "ID1", 2, 2, 2, 2);
+		b3 = new Bruker ("NAVN2", "ID2", 3, 3, 3, 3); 
 	
 		calendar = Calendar.getInstance();
 		calendar1 = Calendar.getInstance();
@@ -113,43 +114,38 @@ public class TestMeldingCollection {
 	}
 
 	@Test
-	public void testSortertEtterTidSisteFørst() {
-		samling.sortertEtterTid(true);
+	public void testSortertEtterTid() {
+		Collection<TwitterMelding> samling1 = samling.sortertEtterTid(true);
+		Collection<TwitterMelding> samling2 = samling.sortertEtterTid(false);
 	
-		assertEquals(samling.get(0), melding3); 
-		assertEquals(samling.get(1), melding1);
-		assertEquals(samling.get(2), melding2);
+		for (TwitterMelding twitterMelding : samling1) {
+			
+			assertTrue(Iterables.get(samling1, 0).dato().after(twitterMelding.dato()) || Iterables.get(samling1, 0).dato().equals(twitterMelding.dato() )); 
+		}
+		
+		for (TwitterMelding twitterMelding : samling2) {
+			assertTrue(Iterables.get(samling2, 0).dato().before(twitterMelding.dato()) || Iterables.get(samling2, 0).dato().equals(twitterMelding.dato()) ); 
+		}
 	}
 	
-	@Test
-	public void testSortertEtterTidSisteSist(){
-		samling.sortertEtterTid(false);
-
-		assertEquals(samling.get(0), melding2); 
-		assertEquals(samling.get(1), melding1);
-		assertEquals(samling.get(2), melding3);
-	}
+	
+	
 
 	@Test
 	public void testSortertEtterLengde() {
 	
 		Collection<TwitterMelding> samling1 = samling.sortertEtterLengde(true);
-		System.out.println(samling1);
-		for (int i = 0; i < samling1.size(); i++) {
-			
-			assertTrue(samling1.iterator().next().getMeldingsTekst().length() <= Iterables.get(samling1, i).getMeldingsTekst().length());
-			
-		} 
+		Collection<TwitterMelding> samling2 = samling.sortertEtterLengde(false);
 		
-	
-		samling1 = samling.sortertEtterLengde(false);
-		System.out.println(samling1);
-		System.out.println(samling1.size());
-		for (int i = 0; i < samling1.size(); i++) {
-			
-			assertTrue(samling1.iterator().next().getMeldingsTekst().length() >= Iterables.get(samling1, i).getMeldingsTekst().length());
-			
-		} 
+		for (TwitterMelding twitterMelding : samling1) {
+			assertTrue(Iterables.get(samling1, 0).getMeldingsTekst().length() >= twitterMelding.getMeldingsTekst().length()); 
+		}
+		
+		for (TwitterMelding twitterMelding : samling2) {
+			assertTrue(Iterables.get(samling2, 0).getMeldingsTekst().length() <= twitterMelding.getMeldingsTekst().length()); 
+		}
+		
+		
 		
 		
 	}

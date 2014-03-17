@@ -15,17 +15,9 @@ public class CompareMeldingLength implements Comparator<TwitterMelding>{
 	@Override
 	public int compare(TwitterMelding o1, TwitterMelding o2) {
 		int compare; 
+		compare = o1.getMeldingsTekst().length() - o2.getMeldingsTekst().length(); 
 		
-		if (o1.getMeldingsTekst().length() > o2.getMeldingsTekst().length()){
-			compare = -1;
-		}
-		
-		if  (o1.getMeldingsTekst().length() < o2.getMeldingsTekst().length()){
-			compare =  1;
-			
-		} else compare = 0; 
-		
-	if (!lengsteFørst){
+	if (lengsteFørst){
 		compare = compare*-1; 
 	}
 	

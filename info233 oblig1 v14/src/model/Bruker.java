@@ -1,7 +1,6 @@
 package model;
 
 import kravspesifikasjon.TwitterBruker;
-import kravspesifikasjon.TwitterMelding;
 
 public class Bruker implements TwitterBruker {
 
@@ -13,19 +12,20 @@ public class Bruker implements TwitterBruker {
 	private static final long serialVersionUID = -7415788700512583232L;
 	
 	private String navn, ID; 
-	private Integer numTweets, numFollowers, numFriends;
+	private Integer numTweets, numFollowers, numFriends, numCharacters;
 	
 
 
 	
 	
-	public Bruker(String navn, String ID, Integer numTweets, Integer numFollowers, Integer numFriends){
+	public Bruker(String navn, String ID, Integer numTweets, Integer numFollowers, Integer numFriends, Integer numChars){
 		this.navn = navn; 
 		this.ID = ID; 
 		this.numTweets = numTweets; 
 		this.numFollowers = numFollowers; 
 		this.numFriends = numFriends; 
 		this.numFollowers = numFollowers; 
+		this.numCharacters = numChars; 
  
 	}
 	
@@ -54,14 +54,15 @@ public class Bruker implements TwitterBruker {
 
 	@Override
 	public int numCharacters() {
-		MeldingCollection meldinger = new MeldingCollection();
-		meldinger.meldingerFra(this); 
-		int numChar = 0;
-		
-		for (TwitterMelding tweet : meldinger) {
-			numChar += tweet.getMeldingsTekst().length();
-		}
-		return numChar; 
+		return numCharacters; 
+	}
+	
+	/**
+	 * Sets the total number of characters. 
+	 * @param newNum the new number
+	 */
+	public void setNumCharacters(Integer newNum){
+		this.numCharacters = newNum; 
 	}
 
 	@Override
@@ -73,10 +74,27 @@ public class Bruker implements TwitterBruker {
 	public int numFollowers() {
 		return numFollowers;
 	}
+	
+	/**
+	 * Sets the number of followers
+	 * @param newNumb the new number of followers
+	 */
+	public void setNumFollowers(Integer newNumb){
+		this.numFollowers = newNumb; 
+	}
 
 	@Override
 	public int numFriends() {
 		return numFriends;
+	}
+	
+	/**
+	 * Sets the number of freinds
+	 * @param newNumb the new number of friends. 
+	 */
+
+	public void setNumFriends(Integer newNumb){
+		this.numFriends = newNumb; 
 	}
 	
 	@Override

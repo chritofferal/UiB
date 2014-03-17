@@ -124,16 +124,21 @@ public class MeldingCollection implements TwitterMeldingCollection, Iterable<Twi
 
 	@Override
 	public Collection<TwitterMelding> sortertEtterTid(boolean nyesteFørst) {
-
-		Collections.sort(samling, new CompareMeldingTime(nyesteFørst));		
-		return samling;
+		ArrayList<TwitterMelding> nySamling = new ArrayList<>(samling); 	
+		
+		Collections.sort(nySamling, new CompareMeldingTime(nyesteFørst));
+		
+		return nySamling;
+		
 	}
 
 	@Override
 	public Collection<TwitterMelding> sortertEtterLengde(boolean lengsteFørst) {
-		ArrayList<TwitterMelding> nySamling = new ArrayList<>(samling); 
+		
+		ArrayList<TwitterMelding> nySamling = new ArrayList<>(samling); 	
 	
 		Collections.sort(nySamling, new CompareMeldingLength(lengsteFørst));
+		
 		return nySamling;
 	}
 

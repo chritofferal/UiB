@@ -11,6 +11,8 @@ import model.BrukerCollection;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.BrukerNotFoundException;
+
 public class TestBrukerCollection {
 	
 	Bruker b1, b2, b3, b4;
@@ -18,26 +20,25 @@ public class TestBrukerCollection {
 
 	@Before
 	public void setUp() throws Exception {
-		b1 = new Bruker ("Bruker 1", "U0001");
-		b2 = new Bruker ("Bruker 2", "U0002");
-		b3 = new Bruker ("Bruker 3", "U0003");
-		b4 = new Bruker ("Bruker 4", "U0004");
-		
+		b1 = new Bruker ("Bruker 1", "U0001", 1 , 1 , 1 , 1);
+		b2 = new Bruker ("Bruker 2", "U0002", 2 , 2 , 2 , 2);
+		b3 = new Bruker ("Bruker 3", "U0003", 3 , 3 , 3 , 3);
+		b4 = new Bruker ("Bruker 4", "U0004", 4 , 4 , 4 , 4);
+		 
 		brukerSamling = new BrukerCollection();
+		brukerSamling1 = new BrukerCollection(); 
 		brukerSamling.insert(b1); 
 		brukerSamling.insert(b2); 
 		brukerSamling.insert(b3); 
+	
 	}
 
 	@Test
 	public void testBrukerCollection(){
-	ArrayList<TwitterBruker> konstruktørTest = new ArrayList<>(); 
-	konstruktørTest.add(b1); 
-	konstruktørTest.add(b2); 
-	konstruktørTest.add(b3); 
-		
-	brukerSamling1 = new BrukerCollection(konstruktørTest);
-	
+
+		System.out.println(brukerSamling.list());
+	brukerSamling1 = new BrukerCollection(brukerSamling.list());
+	System.out.println(brukerSamling1);
 	assertEquals(brukerSamling, brukerSamling1); 
 	}
 	
@@ -55,6 +56,7 @@ public class TestBrukerCollection {
 
 	@Test
 	public void testInsertTwitterBrukerInt() {
+		
 		brukerSamling.insert(b4, 2); 
 		
 		assertEquals(b4, brukerSamling.get(2));
@@ -75,28 +77,58 @@ public class TestBrukerCollection {
 	}
 
 	@Test
-	public void testGetBruker() {
-		fail("Not yet implemented");
+	public void testGetBruker() throws BrukerNotFoundException {
+		assertEquals(b1, brukerSamling.getBruker("U0001"));
+	
 	}
+	
+	@Test(expected = BrukerNotFoundException.class)  
+	public void testBrukerNotFound() throws BrukerNotFoundException {  
+	  brukerSamling.getBruker("IDFEIL"); 
+	}
+	
 
 	@Test
 	public void testSortertEtterAntallMeldinger() {
-		fail("Not yet implemented");
+		BrukerCollection sortert = new BrukerCollection(brukerSamling.sortertEtterAntallMeldinger(false)); 
+		assertEquals(b3, sortert.get(0));
+		
+		sortert = new BrukerCollection(brukerSamling.sortertEtterAntallMeldinger(true)); 
+		assertEquals(b1, sortert.get(0));
 	}
 
 	@Test
 	public void testSortertEtterAntallFollowers() {
-		fail("Not yet implemented");
+		BrukerCollection sortert = new BrukerCollection(brukerSamling.sortertEtterAntallFollowers(false)); 
+		assertEquals(b3, sortert.get(0));
+		
+		sortert = new BrukerCollection(brukerSamling.sortertEtterAntallFollowers(true)); 
+		assertEquals(b1, sortert.get(0));
 	}
 
 	@Test
 	public void testSortertEtterAntallFriends() {
-		fail("Not yet implemented");
+		BrukerCollection sortert = new BrukerCollection(brukerSamling.sortertEtterAntallFriends(false)); 
+		assertEquals(b3, sortert.get(0));
+		
+		sortert = new BrukerCollection(brukerSamling.sortertEtterAntallFriends(true)); 
+		assertEquals(b1, sortert.get(0));
 	}
 
 	@Test
 	public void testEquals() {
-		fail("Not yet implemented");
+		brukerSamling1.insert(b1);
+		brukerSamling1.insert(b2);
+		brukerSamling1.insert(b3);
+		
+		
+		//System.out.println(brukerSamling);
+		
+		assertTrue(brukerSamling1.equals(brukerSamling));
+		
+		brukerSamling1 = new BrukerCollection(brukerSamling1.sortertEtterAntallFollowers(false)); 
+	
+		assertTrue(!brukerSamling1.equals(brukerSamling));
 	}
 
 	@Test

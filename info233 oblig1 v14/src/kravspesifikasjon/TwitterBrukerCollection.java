@@ -2,14 +2,17 @@ package kravspesifikasjon;
 
 import java.util.Collection;
 
+import exceptions.BrukerNotFoundException;
+
 public interface TwitterBrukerCollection extends Samling<TwitterBruker>{
 		/**
 		 * Returnerer en bruker med gitt ID. IDer er unike for hver bruker.
 		 * Det skal derfor aldri være to brukere med samme ID.
 		 * @param id den unike ID-en til brukeren.
 		 * @return en TwitterBruker med gitt ID hvis en slik en finnes, ellers null.
+		 * @throws BrukerNotFoundException 
 		 */
-		public TwitterBruker getBruker(String id);
+		public TwitterBruker getBruker(String id) throws BrukerNotFoundException;
 		
 		/**
 		 * Sorterer etter antall meldinger brukerene har sendt.
