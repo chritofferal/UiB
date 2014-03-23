@@ -1,17 +1,17 @@
 package interfaces;
 
-public interface Monster {
+public interface MonsterInterface {
 
 	/**
 	 * Attacks the player
 	 */
-	public void attack();
+	public int attack();
 
 	/**
 	 * Checks if the monster is dead
 	 */
 	
-	public boolean dead(); 
+	public boolean isDead(); 
 	
 	
 	

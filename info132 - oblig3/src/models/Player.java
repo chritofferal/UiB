@@ -1,7 +1,5 @@
 package models;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -20,6 +18,7 @@ public class Player {
 	private HashMap<String, Item> items;
 	private int maxWeight;
 	private int gold;
+	private final static int MIN_DAMMAGE = 30;  
 
 	/**
 	 * Constructor for the Player class.
@@ -37,6 +36,7 @@ public class Player {
 		setMaxWeight(maxWeight);
 		items = new HashMap<String, Item>();;
 		health = 100;
+		
 	}
 
 	/**
@@ -166,7 +166,16 @@ public class Player {
 		System.out.println("You do not own that item");
 		return false;	
 	}
+	
+	/**
+	 * 
+	 */
 
+	public int attack() {
+		
+		int random = (int) (Math.random()*20+1); 		
+		return  MIN_DAMMAGE + random; 			
+	}
 	
 	
 	@Override
@@ -217,6 +226,10 @@ public class Player {
 	 */
 	public int getGold() {
 		return gold;
+	}
+
+	public static int getMinDammage() {
+		return MIN_DAMMAGE;
 	}
 
 	/**

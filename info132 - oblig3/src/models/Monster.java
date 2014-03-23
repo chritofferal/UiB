@@ -1,9 +1,18 @@
 package models;
 
+import monsterTypes.Rat;
+
+
+/**
+ * En monsterklasse til bruk i et rollespill. 
+ * Klassen har fire subklasser som skal representere fire typer monstere som alle har forskjellige egenskaper.  
+ * @author Christoffer
+ *
+ */
 public class Monster {
 
-	private int health, minDmg, level; 
-	private double dmgMultiplyer; 
+	private int health, level; 
+	private double dmgMultiplyer, maxDmg;
 	private String name; 
 	final int MIN_DMG = 20; 
 	
@@ -14,18 +23,21 @@ public class Monster {
 	 * @param health health of the new monster
 	 * @param name name of the new monster
 	 */
-	public Monster(String name, int health, int level) {		
-		setHealth(health);
-		setMinDmg(MIN_DMG);
-		setName(name);
+	public Monster(int health, int level ) {		
+		changeHealth(health);
+		setName(getClass().getSimpleName()+" " + "(Level: " + level +")");
 		setLevel(level);
+		setMaxDmg(MIN_DMG + (level*dmgMultiplyer));
+		
+		
 	}
 	
 	public int attack(){
 		if (miss() != true){
-			System.out.println(MIN_DMG * dmgMultiplyer);
-			return (int) (MIN_DMG * dmgMultiplyer); 
-		} else return -1; 
+			int dmg = (int) ((Math.random()*maxDmg+1) + MIN_DMG); 			
+			return (int) (dmg); 
+		} else 
+			return -1; 
 	}
 	
 	private boolean miss(){
@@ -71,6 +83,18 @@ public class Monster {
 
 
 	/**
+	 * @return the isDead
+	 */
+	public boolean isDead() {
+		if ( getHealth() <= 0)	{
+			return true;
+		} else 
+		return false; 
+	}
+
+
+
+	/**
 	 * @return the health
 	 */
 	public int getHealth() {
@@ -79,27 +103,39 @@ public class Monster {
 	/**
 	 * @param health the health to set
 	 */
-	public void setHealth(int health) {
-		this.health = health;
+	public void changeHealth(int change) {
+		int temp = health + change;
+		if (temp > 100) {
+			health = 100;
+		} else if (temp <= 0) {
+			health = 0;
+		} else {
+			health = temp;
+		}
+		
 	}
+
 	/**
-	 * @return the dmg
+	 * @return the maxDmg
 	 */
-	public int getMinDmg() {
-		return minDmg;
+	public double getMaxDmg() {
+		return maxDmg;
 	}
+
 	/**
-	 * @param dmg the dmg to set
+	 * @param maxDmg the maxDmg to set
 	 */
-	public void setMinDmg(int dmg) {
-		this.minDmg = dmg;
+	public void setMaxDmg(double maxDmg) {
+		this.maxDmg = maxDmg;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+	
 	/**
 	 * @param name the name to set
 	 */
@@ -107,11 +143,44 @@ public class Monster {
 		this.name = name;
 	}
 	
+	@Override
+	public String toString(){
+		return getName(); 
+	}
+	
+	
 	
 	public static void main(String[] args) {
-		
-		Monster monster = new Monster("Goblinator", 100	, 1);
-		monster.attack();
-		
+		Rat drag = new Rat(100, 10); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+		System.out.println(drag.attack()); 
+	
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

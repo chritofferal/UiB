@@ -33,5 +33,9 @@ public class Game {
 		System.out.println(player1);
 		player1.useItem(item1);
 		
+		Battleground bg = new Battleground(player1, 3); 
+		bg.startBattleground(); 
+		
+		
 	}
 }
